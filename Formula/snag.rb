@@ -1,8 +1,8 @@
 class Snag < Formula
   desc "Browser-backed web content fetcher for AI agents"
   homepage "https://github.com/p3bot/snag"
-  url "https://github.com/p3bot/snag/archive/refs/tags/v1.1.1.tar.gz"
-  sha256 "969e3133cae8c931ffb6d9fbc550e009cbac13709962682328f223b45fcf6c82"
+  url "https://github.com/p3bot/snag/archive/refs/tags/v1.1.2.tar.gz"
+  sha256 "f5a756b793791183c8085a16b7b712ae9947731297e89ff2bab2525bc222c3e6"
   license "MPL-2.0"
 
   depends_on "go" => :build
