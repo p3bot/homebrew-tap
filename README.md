@@ -6,6 +6,8 @@ Homebrew formulae for [p3bot](https://github.com/p3bot) tools.
 
 ```bash
 brew tap p3bot/tap
+brew trust p3bot/tap
+
 brew install p3bot/tap/kagi
 brew install p3bot/tap/snag
 brew install p3bot/tap/webctl
