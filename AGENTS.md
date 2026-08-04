@@ -20,7 +20,7 @@ Build from source (not bottles or prebuilt bins). Each formula downloads a tagge
 | Formula | Upstream tag | Module | Build path | Version ldflag |
 | --- | --- | --- | --- | --- |
 | kagi | v1.0.1 | github.com/p3bot/kagi | `.` (root main) | `-X main.version=` |
-| snag | v1.1.2 | github.com/p3bot/snag | `.` (root main) | `-X main.version=` |
+| snag | v1.1.3 | github.com/p3bot/snag | `.` (root main) | `-X main.version=` |
 | webctl | v0.2.1 | github.com/p3bot/webctl | `./cmd/webctl` | `-X github.com/p3bot/webctl/internal/cli.Version=` |
 | agentdex | v0.0.2 | github.com/p3bot/agentdex | `./cmd/agentdex` | `github.com/p3bot/agentdex/internal/cli.{Version,Commit,Date}` |
 | start | v0.0.1 | github.com/p3bot/start | `./cmd/start` | `github.com/p3bot/start/internal/cli.{cliVersion,commit,buildDate}` |
