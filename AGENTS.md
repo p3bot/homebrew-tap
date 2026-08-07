@@ -28,6 +28,119 @@ Build from source (not bottles or prebuilt bins). Each formula downloads a tagge
 
 Ldflag package paths must match `go.mod` of the tagged source.
 
+## Local package paths
+
+Sibling git repos under the p3bot workspace. Paths are relative to this tap repo (`homebrew-tap/`).
+
+| Formula | Formula file | Upstream clone | GitHub |
+| --- | --- | --- | --- |
+| kagi | `Formula/kagi.rb` | `../kagi` | https://github.com/p3bot/kagi |
+| snag | `Formula/snag.rb` | `../snag` | https://github.com/p3bot/snag |
+| webctl | `Formula/webctl.rb` | `../webctl` | https://github.com/p3bot/webctl |
+| agentdex | `Formula/agentdex.rb` | `../agentdex` | https://github.com/p3bot/agentdex |
+| start | `Formula/start.rb` | `../start` | https://github.com/p3bot/start |
+| pj | `Formula/pj.rb` | `../pj` | https://github.com/p3bot/pj |
+
+Note: clones are independent git repositories. Run all git and build commands from the upstream path, then return here for the formula bump.
+
+## Release workflow
+
+Releases are manual. There is no CI publish step. Users install from the tap `main` branch after the formula lands.
+
+Prerequisites: clean `main` on both upstream and this tap; push access to both GitHub remotes; `brew`, `curl`, `gh` (optional, for GitHub Release notes).
+
+### 1. Choose version
+
+In the upstream clone (`../<name>`):
+
+```bash
+cd ../<name>
+git fetch --tags origin
+git tag -l 'v*' | sort -V | tail -5
+git log "$(git describe --tags --abbrev=0 2>/dev/null || echo '')"..HEAD --oneline
+```
+
+Pick the next semver tag (`vMAJOR.MINOR.PATCH`). Bump MAJOR for breaking CLI changes, MINOR for features, PATCH for fixes.
+
+### 2. Verify upstream is ready
+
+```bash
+cd ../<name>
+git switch main
+git pull --ff-only
+git status   # must be clean
+# run the project's usual tests (go test ./..., make test, etc.)
+```
+
+Confirm HEAD is what you want to ship. Do not tag unpushed or dirty work.
+
+### 3. Tag and push upstream
+
+```bash
+cd ../<name>
+VERSION=0.0.2   # no leading v in the variable
+git tag -a "v${VERSION}" -m "<name>: v${VERSION}"
+git push origin "v${VERSION}"
+git push origin main   # if main has commits not yet on remote
+```
+
+Optional GitHub Release (notes from commits since previous tag):
+
+```bash
+cd ../<name>
+gh release create "v${VERSION}" --generate-notes --title "v${VERSION}"
+```
+
+The source archive URL used by Homebrew is:
+
+`https://github.com/p3bot/<name>/archive/refs/tags/v${VERSION}.tar.gz`
+
+### 4. Bump the formula in this tap
+
+```bash
+cd /path/to/homebrew-tap   # this repo
+```
+
+1. Set `url` to the new tag archive.
+2. Recompute sha256:
+
+```bash
+curl -sL "https://github.com/p3bot/<name>/archive/refs/tags/v${VERSION}.tar.gz" | shasum -a 256
+```
+
+3. Paste the checksum into `sha256`.
+4. If the formula hardcodes a commit in ldflags (agentdex, start):
+
+```bash
+git -C ../<name> rev-list -n1 "v${VERSION}"
+```
+
+5. Update the Upstream tag cell in the Publishable tools table above.
+6. Confirm `test do` still matches version or help output for this release.
+
+### 5. Test and audit
+
+```bash
+brew style Formula/<name>.rb
+brew audit --strict --online Formula/<name>.rb
+brew uninstall <name> 2>/dev/null || true
+brew install --build-from-source ./Formula/<name>.rb
+brew test Formula/<name>.rb
+# smoke: <name> --version  |  agentdex version  |  pj --help
+```
+
+Fix any failures before committing.
+
+### 6. Commit and publish the tap
+
+```bash
+git add Formula/<name>.rb AGENTS.md
+git commit -m "<name>: bump to v${VERSION}"
+git push origin main
+```
+
+No separate deploy: `brew tap p3bot/tap` and `brew install p3bot/tap/<name>` read `main`. Existing installs upgrade with `brew update && brew upgrade <name>` (or reinstall from source if needed).
+
 ## New formula
 
 1. Create `Formula/<name>.rb` with class name PascalCase of the binary name.
