@@ -24,7 +24,7 @@ Build from source (not bottles or prebuilt bins). Each formula downloads a tagge
 | webctl | v0.2.1 | github.com/p3bot/webctl | `./cmd/webctl` | `-X github.com/p3bot/webctl/internal/cli.Version=` |
 | agentdex | v0.0.2 | github.com/p3bot/agentdex | `./cmd/agentdex` | `github.com/p3bot/agentdex/internal/cli.{Version,Commit,Date}` |
 | start | v0.0.1 | github.com/p3bot/start | `./cmd/start` | `github.com/p3bot/start/internal/cli.{cliVersion,commit,buildDate}` |
-| tk | (post-cutover) | github.com/p3bot/tk | `./cmd/tk` | none (no version command yet); test via `--help`; formula url/sha256 operator-owned until first post-cutover tag |
+| tk | v0.1.0 | github.com/p3bot/tk | `./cmd/tk` | none (no version command yet); test via `--help` |
 
 Ldflag package paths must match `go.mod` of the tagged source.
 
