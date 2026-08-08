@@ -13,7 +13,7 @@ brew install p3bot/tap/snag
 brew install p3bot/tap/webctl
 brew install p3bot/tap/agentdex
 brew install p3bot/tap/start
-brew install p3bot/tap/pj
+brew install p3bot/tap/tk
 ```
 
 ## Formulae
@@ -25,7 +25,7 @@ brew install p3bot/tap/pj
 | [webctl](https://github.com/p3bot/webctl) | Browser automation and debugging CLI | v0.2.1 |
 | [agentdex](https://github.com/p3bot/agentdex) | Detect AI coding agents on the local machine | v0.0.2 |
 | [start](https://github.com/p3bot/start) | AI agent CLI orchestrator built on CUE | v0.0.1 |
-| [pj](https://github.com/p3bot/pj) | Agent project management via plain markdown | v0.0.1 |
+| [tk](https://github.com/p3bot/tk) | Agent ticket management via plain markdown | (post-cutover tag TBD) |
 
 ## License
 
