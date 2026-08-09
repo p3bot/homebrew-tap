@@ -24,7 +24,7 @@ Build from source (not bottles or prebuilt bins). Each formula downloads a tagge
 | webctl | v0.2.1 | github.com/p3bot/webctl | `./cmd/webctl` | `-X github.com/p3bot/webctl/internal/cli.Version=` |
 | agentdex | v0.0.2 | github.com/p3bot/agentdex | `./cmd/agentdex` | `github.com/p3bot/agentdex/internal/cli.{Version,Commit,Date}` |
 | start | v0.0.1 | github.com/p3bot/start | `./cmd/start` | `github.com/p3bot/start/internal/cli.{cliVersion,commit,buildDate}` |
-| tk | v0.1.0 | github.com/p3bot/tk | `./cmd/tk` | none (no version command yet); test via `--help` |
+| tk | v0.3.0 | github.com/p3bot/tk | `./cmd/tk` | `-X github.com/p3bot/tk/internal/cli.cliVersion=` |
 
 Ldflag package paths must match `go.mod` of the tagged source.
 
@@ -126,7 +126,7 @@ brew audit --strict --online Formula/<name>.rb
 brew uninstall <name> 2>/dev/null || true
 brew install --build-from-source ./Formula/<name>.rb
 brew test Formula/<name>.rb
-# smoke: <name> --version  |  agentdex version  |  tk --help
+# smoke: <name> --version  |  agentdex version
 ```
 
 Fix any failures before committing.
@@ -206,7 +206,7 @@ brew style Formula/<name>.rb
 brew audit --strict --online Formula/<name>.rb
 brew install --build-from-source ./Formula/<name>.rb
 brew test Formula/<name>.rb
-<name> --version   # or: agentdex version; tk has no version flag yet
+<name> --version   # or: agentdex version
 ```
 
 Reinstall path for updates:
