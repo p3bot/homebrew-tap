@@ -1,8 +1,8 @@
 class Agentdex < Formula
   desc "Detect AI coding agents installed on the local machine"
   homepage "https://github.com/p3bot/agentdex"
-  url "https://github.com/p3bot/agentdex/archive/refs/tags/v2.0.0.tar.gz"
-  sha256 "1ef62982e98f651e2e96578e549e75235ec61a55a430097612a918ae63e84f45"
+  url "https://github.com/p3bot/agentdex/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "5659b78b8bd8502cd2b72cab6413fe9b60f860e65677973e62b2cf45927e8794"
   license "MPL-2.0"
 
   depends_on "go" => :build
