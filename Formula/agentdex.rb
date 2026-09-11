@@ -1,8 +1,8 @@
 class Agentdex < Formula
   desc "Detect AI coding agents installed on the local machine"
   homepage "https://github.com/p3bot/agentdex"
-  url "https://github.com/p3bot/agentdex/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "5659b78b8bd8502cd2b72cab6413fe9b60f860e65677973e62b2cf45927e8794"
+  url "https://github.com/p3bot/agentdex/archive/refs/tags/v1.2.0.tar.gz"
+  sha256 "104627366829b966b2edd8dffeef05f33e92be7c677208e8a9ea33100889d7b4"
   license "MPL-2.0"
 
   depends_on "go" => :build
@@ -12,7 +12,7 @@ class Agentdex < Formula
     ldflags = %W[
       -s -w
       -X github.com/p3bot/agentdex/internal/cli.Version=#{version}
-      -X github.com/p3bot/agentdex/internal/cli.Commit=f5b3e3d2adc5df0cd8c5658ddc9ec8fa4c1958b5
+      -X github.com/p3bot/agentdex/internal/cli.Commit=731060d018bbaf700008e6278a09a3a1a9eae0f3
       -X github.com/p3bot/agentdex/internal/cli.Date=#{time.iso8601}
     ]
     system "go", "build", *std_go_args(ldflags: ldflags), "./cmd/agentdex"
